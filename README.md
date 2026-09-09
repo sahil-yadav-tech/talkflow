@@ -1,8 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TalkFlow
+
+TalkFlow is a real-time communication platform built for **real-time chat, voice communication, online presence, and AI-powered conversations**.
+
+The project is built using modern web technologies with a scalable architecture, combining **Next.js, React.js, Node.js, Express.js, MongoDB, Socket.IO, WebRTC, and Redis**.
+
+## Tech Stack
+
+* **Frontend:** Next.js, React.js, TypeScript, Tailwind CSS
+* **Backend:** Node.js, Express.js
+* **Real-Time:** Socket.IO, WebRTC
+* **Database:** MongoDB, Mongoose
+* **Caching & Scaling:** Redis
+* **Authentication:** JWT
+* **AI:** LLM, Speech-to-Text, Text-to-Speech
+* **Future:** RabbitMQ, Apache Kafka, Docker, AWS, CI/CD
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -14,23 +35,48 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 with your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Real-time one-to-one chat
+* Real-time voice communication
+* Online/offline presence
+* WebRTC-based voice calls
+* Socket.IO real-time communication
+* JWT authentication
+* AI-powered conversations
+* Scalable real-time architecture
+
+## Roadmap
+
+* [ ] Real-time Chat
+* [ ] User Presence
+* [ ] Voice Calling
+* [ ] AI Voice Assistant
+* [ ] Redis Integration
+* [ ] RabbitMQ Integration
+* [ ] Kafka Integration
+* [ ] Docker & AWS Deployment
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+To learn more about the technologies used in TalkFlow:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* [Next.js Documentation](https://nextjs.org/docs)
+* [React Documentation](https://react.dev)
+* [Node.js Documentation](https://nodejs.org/docs)
+* [Socket.IO Documentation](https://socket.io/docs)
+* [WebRTC Documentation](https://webrtc.org)
+* [MongoDB Documentation](https://www.mongodb.com/docs)
+* [Redis Documentation](https://redis.io/docs)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Status
 
-## Deploy on Vercel
+TalkFlow is currently **under active development**. New features and scalability improvements will be added progressively.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Author
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Sahil Yadav**
+
+Full Stack Developer | MERN | Next.js | Node.js
