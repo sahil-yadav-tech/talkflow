@@ -9,6 +9,7 @@ import {
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import ChatPage from "./pages/ChatPage";
+import Home from "./pages/Home";
 
 
 // import Profile from "./components/Profile";
@@ -17,13 +18,17 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
+        {/* <Route
           path="/"
           element={
-            <Navigate to="/login" replace />
+            <Navigate to="/"  />
           }
-        />
+        /> */}
 
+   <Route
+          path="/"
+          element={<Home />}
+        />
         <Route
           path="/login"
           element={<Login />}
