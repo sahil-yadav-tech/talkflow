@@ -391,8 +391,3 @@ const ChatPage = () => {
 };
 
 export default ChatPage;
-
-SELECT *
-FROM employees
-OFFSET 2
-LIMIT 3;
