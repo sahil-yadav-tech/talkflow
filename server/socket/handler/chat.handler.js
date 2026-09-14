@@ -6,9 +6,6 @@ import { getChatRoom } from "../rooms/chat.room.js";
 
 export const handleChatEvents = (io, socket) => {
 
-  // =========================
-  // JOIN CHAT
-  // =========================
 
   socket.on(
     "join-chat",
