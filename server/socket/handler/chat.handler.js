@@ -1,9 +1,7 @@
 import { findChatById } from "../../repositories/chat.repository.js";
-
 import {
   createMessage,
 } from "../../repositories/message.repository.js";
-
 import { getChatRoom } from "../rooms/chat.room.js";
 
 export const handleChatEvents = (io, socket) => {

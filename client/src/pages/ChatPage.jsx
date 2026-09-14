@@ -6,32 +6,20 @@ import socket from "../lib/socket";
 import ChatWindow from "../features/chat/components/ChatWindow";
 import { getCurrentUser } from "../features/auth/services/auth.api";
 
-
-
-
-
 const ChatPage = () => {
-  const [currentUser, setCurrentUser] =
-    useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
-  const [selectedUser, setSelectedUser] =
-    useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
 
-  const [chatId, setChatId] =
-    useState(null);
+  const [chatId, setChatId] = useState(null);
 
-  const [messages, setMessages] =
-    useState([]);
+  const [messages, setMessages] = useState([]);
 
-  const [text, setText] =
-    useState("");
+  const [text, setText] = useState("");
 
-  const [loading, setLoading] =
-    useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const [userLoading, setUserLoading] =
-    useState(true);
-
+  const [userLoading, setUserLoading] = useState(true);
 
   // =========================
   // GET CURRENT USER
@@ -42,20 +30,13 @@ const ChatPage = () => {
       try {
         setUserLoading(true);
 
-        const user =
-          await getCurrentUser();
+        const user = await getCurrentUser();
 
-        console.log(
-          "Logged in user:",
-          user
-        );
+        console.log("Logged in user:", user);
 
         setCurrentUser(user);
       } catch (error) {
-        console.error(
-          "Failed to get current user:",
-          error
-        );
+        console.error("Failed to get current user:", error);
       } finally {
         setUserLoading(false);
       }
@@ -64,133 +45,77 @@ const ChatPage = () => {
     fetchCurrentUser();
   }, []);
 
-
   // =========================
   // SOCKET CONNECT
   // =========================
 
   useEffect(() => {
     const handleConnect = () => {
-      console.log(
-        "Socket connected:",
-        socket.id
-      );
+      console.log("Socket connected:", socket.id);
     };
 
-    const handleConnectError = (
-      error
-    ) => {
-      console.error(
-        "Socket connection error:",
-        error.message
-      );
+    const handleConnectError = (error) => {
+      console.error("Socket connection error:", error.message);
     };
 
-    socket.on(
-      "connect",
-      handleConnect
-    );
+    socket.on("connect", handleConnect);
 
-    socket.on(
-      "connect_error",
-      handleConnectError
-    );
+    socket.on("connect_error", handleConnectError);
 
     return () => {
-      socket.off(
-        "connect",
-        handleConnect
-      );
+      socket.off("connect", handleConnect);
 
-      socket.off(
-        "connect_error",
-        handleConnectError
-      );
+      socket.off("connect_error", handleConnectError);
     };
   }, []);
-
 
   // =========================
   // RECEIVE NEW MESSAGE
   // =========================
 
   useEffect(() => {
-    const handleNewMessage = (
-      message
-    ) => {
-      console.log(
-        "New message received:",
-        message
-      );
+    const handleNewMessage = (message) => {
+      console.log("New message received:", message);
 
-      setMessages(
-        (prevMessages) => [
-          ...prevMessages,
-          message,
-        ]
-      );
+      setMessages((prevMessages) => [...prevMessages, message]);
     };
 
-    socket.on(
-      "new-message",
-      handleNewMessage
-    );
+    socket.on("new-message", handleNewMessage);
 
     return () => {
-      socket.off(
-        "new-message",
-        handleNewMessage
-      );
+      socket.off("new-message", handleNewMessage);
     };
   }, []);
-
 
   // =========================
   // SELECT USER
   // =========================
 
-  const handleSelectUser = async (
-    user
-  ) => {
+  const handleSelectUser = async (user) => {
     try {
+      console.log(user, "user");
+      
       setLoading(true);
 
       setSelectedUser(user);
 
       // Get/Create chat
 
-      const chat =
-        await createChat(user._id);
+      const chat = await createChat(user._id);
 
-      const currentChatId =
-        chat._id;
+      const currentChatId = chat._id;
 
-      console.log(
-        "Chat ID:",
-        currentChatId
-      );
+      console.log("Chat ID:", currentChatId);
 
-      setChatId(
-        currentChatId
-      );
-
+      setChatId(currentChatId);
 
       // Get old messages
 
-      const oldMessages =
-        await getMessages(
-          currentChatId
-        );
+      const oldMessages = await getMessages(currentChatId);
 
-      console.log(
-        "Old messages:",
-        oldMessages
-      );
+      console.log("Old messages:", oldMessages);
 
-      setMessages(
-        oldMessages
-      );
-
+      setMessages(oldMessages);
 
       // Connect socket
 
@@ -198,30 +123,17 @@ const ChatPage = () => {
         socket.connect();
       }
 
-
       // Join chat room
 
-      socket.emit(
-        "join-chat",
-        currentChatId,
-        (response) => {
-          console.log(
-            "Join chat response:",
-            response
-          );
-        }
-      );
-
+      socket.emit("join-chat", currentChatId, (response) => {
+        console.log("Join chat response:", response);
+      });
     } catch (error) {
-      console.error(
-        "Select user error:",
-        error
-      );
+      console.error("Select user error:", error);
     } finally {
       setLoading(false);
     }
   };
-
 
   // =========================
   // SEND MESSAGE
@@ -233,9 +145,7 @@ const ChatPage = () => {
     }
 
     if (!chatId) {
-      console.log(
-        "Please select a user first"
-      );
+      console.log("Please select a user first");
 
       return;
     }
@@ -247,16 +157,12 @@ const ChatPage = () => {
         text,
       },
       (response) => {
-        console.log(
-          "Send message response:",
-          response
-        );
-      }
+        console.log("Send message response:", response);
+      },
     );
 
     setText("");
   };
-
 
   // =========================
   // ENTER KEY
@@ -268,46 +174,28 @@ const ChatPage = () => {
     }
   };
 
-
   // =========================
   // CURRENT USER LOADING
   // =========================
 
   if (userLoading) {
-    return (
-      <div>
-        Loading user...
-      </div>
-    );
+    return <div>Loading user...</div>;
   }
-
 
   // =========================
   // CURRENT USER ERROR
   // =========================
 
   if (!currentUser) {
-    return (
-      <div>
-        Unable to load current user.
-      </div>
-    );
+    return <div>Unable to load current user.</div>;
   }
-
 
   // =========================
   // UI
   // =========================
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "30px",
-        padding: "30px",
-      }}
-    >
-
+    <div className="flex g-30 p-30">
       {/* ================= */}
       {/* USERS */}
       {/* ================= */}
@@ -317,31 +205,20 @@ const ChatPage = () => {
           width: "250px",
         }}
       >
-        <UserList
-          onSelectUser={
-            handleSelectUser
-          }
-        />
+        <UserList onSelectUser={handleSelectUser} />
       </div>
-
 
       {/* ================= */}
       {/* CHAT */}
       {/* ================= */}
 
       <div>
-
         <ChatWindow
-          selectedUser={
-            selectedUser
-          }
+          selectedUser={selectedUser}
           messages={messages}
           loading={loading}
-          currentUserId={
-            currentUser._id
-          }
+          currentUserId={currentUser._id}
         />
-
 
         {/* ================= */}
         {/* INPUT */}
@@ -356,16 +233,11 @@ const ChatPage = () => {
               marginTop: "10px",
             }}
           >
-
             <input
               type="text"
               value={text}
-              onChange={(e) =>
-                setText(e.target.value)
-              }
-              onKeyDown={
-                handleKeyDown
-              }
+              onChange={(e) => setText(e.target.value)}
+              onKeyDown={handleKeyDown}
               placeholder="Type a message..."
               style={{
                 flex: 1,
@@ -373,19 +245,10 @@ const ChatPage = () => {
               }}
             />
 
-            <button
-              onClick={
-                handleSendMessage
-              }
-            >
-              Send
-            </button>
-
+            <button onClick={handleSendMessage}>Send</button>
           </div>
         )}
-
       </div>
-
     </div>
   );
 };
