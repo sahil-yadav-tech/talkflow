@@ -10,9 +10,9 @@ import { handleDisconnect } from "./disconnect.handler.js";
 // import { handleDisconnect } from "./disconnect.handler";
 
 export const handleConnection = (io, socket) => {
-    console.log(
-      `User connected: ${socket.user.id}`
-    );
+  //   console.log(
+  //     `User connected: ${socket.user.id}`
+  //   );
 
   console.log("User connected:", socket.id);
   const userRoom = getUserRoom(socket.user.userId);
