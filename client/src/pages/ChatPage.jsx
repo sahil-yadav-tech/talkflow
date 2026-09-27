@@ -21,6 +21,7 @@ const ChatPage = () => {
 
   const [userLoading, setUserLoading] = useState(true);
 
+  
   // =========================
   // GET CURRENT USER
   // =========================
