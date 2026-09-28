@@ -7,6 +7,7 @@ const conversation = [
   { from: "me", text: "just opened them now 👀" },
   { from: "them", name: "Aisha", text: "take your time, no rush" },
   { from: "me", text: "these are really clean, love the gradient" },
+  
 ];
 
 function TypingDots() {
