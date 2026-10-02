@@ -1,0 +1,51 @@
+                    ┌──────────────┐
+                    │   Register   │
+                    └──────┬───────┘
+                           ↓
+                    ┌──────────────┐
+                    │    Login     │
+                    └──────┬───────┘
+                           ↓
+                  HttpOnly JWT Cookie
+                           ↓
+                    Connect Socket
+                           ↓
+                  Authenticate Socket
+                           ↓
+                 Join user:{userId}
+                           ↓
+                    ┌──────────────┐
+                    │ User List    │
+                    └──────┬───────┘
+                           ↓
+                       Click B
+                           ↓
+              Find conversation A ↔ B
+                    /             \
+                 exists          doesn't exist
+                   ↓                  ↓
+             Fetch messages      Create conversation
+                   \                  /
+                    └───────┬────────┘
+                            ↓
+                  Join conversation room
+                            ↓
+                       Chat Screen
+                            ↓
+                       Send Message
+                            ↓
+                    POST /messages
+                            ↓
+                     Auth + Validate
+                            ↓
+                  Check conversation
+                            ↓
+                       Save DB
+                            ↓
+                  Emit message:new
+                     /            \
+                    ↓              ↓
+                  A UI            B UI
+
+
+                  
